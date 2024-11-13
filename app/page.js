@@ -1,95 +1,51 @@
+import { connectDB } from "@/util/database.js";
+import { Login_btn, Logout_btn, UIs, Update_button } from "./homeUi";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import Check from "./check";
 import Image from "next/image";
-import styles from "./page.module.css";
 
-export default function Home() {
+export default async function Home() {
+  const db = (await connectDB).db('test');
+  const session = await getServerSession(authOptions);
+  let user = null
+  if (session) {
+    user = await db.collection("users").findOne({ email: session.user.email });
+  }
+  // 응시 여부 검사 로직 만들어야 함 => 로그인 시 false로 설정, 응시 제출 시 true로 변경해서 상시 검사 필요 => 그에 따른 렌더링 변화
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <Check session={session} />
+      <div className="flex flex-col items-center mt-5">
+        <div className="text-center">
+            <p className="text-lg font-semibold font-['dinaru'] tracking-wider">2025학년도 유튜브쟁이능력시험</p>
+            <h1 className="text-5xl font-bold font-['dinaru'] mt-4">케인 영역</h1>
         </div>
+        
+        <div className="border border-black rounded-full px-4 py-1 mt-4">
+          <span className="text-lg font-semibold font-['dinaru']">제 11교시</span>
+        </div>
+
+        <div className="w-full border-t-2 border-black mt-5"></div>
+        {/* <div className="border-l-2 border-black h-[calc(100vh-10rem-2rem)]"></div> */}
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="fixed top-56 left-1/2 transform -translate-x-1/2 flex flex-col w-full max-w-72 items-center space-y-4">
+        {session ? (
+          <Logout_btn />
+        ) : (
+          <Login_btn />
+        )}
+        <UIs name={session ? user.name : null} score={session ? user.score : null}
+          grade={session ? user.grade : null} percentileRank={session ? user.percentileRank : null} />
+        <Update_button />
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="fixed bottom-3 left-1/2 transform -translate-x-1/2 flex items-center justify-center space-x-2 p-4">
+        <span className="text-black font-medium">유튜브쟁이능력평가원</span>
+        <Image src="/mte.png" alt="Your Image" width={25} height={25} />
       </div>
-    </main>
+    </>
   );
 }
