@@ -31,19 +31,19 @@ export default async function Home() {
         {/* <div className="border-l-2 border-black h-[calc(100vh-10rem-2rem)]"></div> */}
       </div>
 
-      <div className="fixed top-56 left-1/2 transform -translate-x-1/2 flex flex-col w-full max-w-72 items-center space-y-4">
-        {session ? (
-          <Logout_btn />
-        ) : (
-          <Login_btn />
-        )}
-        <UIs name={session ? user.name : null} score={session ? user.score : null}
-          grade={session ? user.grade : null} percentileRank={session ? user.percentileRank : null} />
+      <div className="flex flex-col items-center w-full max-w-72 space-y-4 my-10 mx-auto">
+        {session ? <Logout_btn /> : <Login_btn />}
+        <UIs
+          name={session ? user.name : null}
+          score={session ? user.score : null}
+          grade={session ? user.grade : null}
+          percentileRank={session ? user.percentileRank : null}
+        />
         <Update_button />
       </div>
 
-      <div className="fixed bottom-3 left-1/2 transform -translate-x-1/2 flex items-center justify-center space-x-2 p-4">
-        <span className="text-black font-medium">유튜브쟁이능력평가원</span>
+      <div className="flex justify-center items-center space-x-2 p-4 mt-auto">
+        <span className="text-black font-medium">유튜브쟁이수준평가원</span>
         <Image src="/mte.png" alt="Your Image" width={25} height={25} />
       </div>
     </>

@@ -63,7 +63,7 @@ export default function Ready_page() {
         </ul>
       </div>
 
-      <div className="flex justify-center max-w-screen-xl mx-auto mt-20">
+      <div className="flex justify-center max-w-screen-xl mx-auto mt-20 mb-16">
         <input
           type="text"
           placeholder="필적 확인란"
@@ -72,8 +72,8 @@ export default function Ready_page() {
         />
       </div>
 
-      <div className="fixed bottom-3 left-1/2 transform -translate-x-1/2 flex items-center justify-center space-x-2 p-4">
-        <span className="text-black font-medium">유튜브쟁이능력평가원</span>
+      <div className="flex justify-center items-center space-x-2 p-4 mt-auto">
+        <span className="text-black font-medium">유튜브쟁이수준평가원</span>
         <Image src="/mte.png" alt="Your Image" width={25} height={25} />
       </div>
     </>

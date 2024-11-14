@@ -113,7 +113,7 @@ export function UIs(props) {
                       </div>
 
                       <div className="mt-2 flex items-center justify-center space-x-2">
-                        <span className="text-black">유튜브쟁이능력평가원맨</span>
+                        <span className="text-black">유튜브쟁이수준평가원맨</span>
                         <Image src="/mte.png" alt="Your Image" width={25} height={25} />
                       </div>
                     </div>
