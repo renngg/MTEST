@@ -51,7 +51,7 @@ export default function Ready_page() {
           <li className="text-lg font-semibold">시험이 종료되면 자동으로 제출됩니다.</li>
           <li className="text-lg font-semibold">문항에 따라 배점이 다릅니다. 3점 문항에는 표시가 되어있고, 그렇지 않은 문항은 모두 2점입니다.</li>
           <li className="text-lg font-semibold">하나의 계정에는 단 한 번의 응시 자격이 주어집니다.</li>
-          <li className="text-lg font-semibold">필적 확인란에 다음의 문구를 입력하면 시험이 시작됩니다.</li>
+          <li className="text-lg font-semibold">필적 확인란에 다음의 문구를 입력하면 시험이 곧바로 시작됩니다.</li>
           <div className="pl-6">
             <div>
               <div className="border border-black p-2 w-auto h-auto inline-block">

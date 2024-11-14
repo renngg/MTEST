@@ -120,10 +120,10 @@ const QuestionPage = () => {
       `}</style>
 
       {/* 문항 이동 버튼 */}
-      <div className="fixed bottom-4 left-0 right-0 flex justify-around space-x-4">
+      <div className="relative bottom-4 left-0 right-0 flex justify-around space-x-4 my-8 mt-28">
         {/* 이전 문항 버튼 */}
         <button
-          onClick={() => setPage(page === 1 ? 20 : page - 1)} // 1번 문제일 경우 16번으로 돌아가기
+          onClick={() => setPage(page === 1 ? 20 : page - 1)}
           className="bg-slate-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-slate-600"
           style={{ display: page === 1 ? 'none' : 'inline-block' }}
         >
@@ -134,11 +134,10 @@ const QuestionPage = () => {
           onClick={() => {
             if (page === 20) {
               if (confirm("제출하시겠습니까?")) {
-                // 제출 로직 추가 가능
                 fetch("/api/submitting", {
                   method: 'POST',
                   headers: {
-                    'Content-Type': 'application/json',  // 요청 헤더에 Content-Type을 설정
+                    'Content-Type': 'application/json',
                   },
                 })
                 .then(() => {
@@ -146,7 +145,7 @@ const QuestionPage = () => {
                   end_audio.play();
                   alert("제출되었습니다. 마킹하지 않은 문항은 0점 처리됩니다.");
                   window.location.href = '/';
-                })
+                });
               }
             } else {
               setPage(page + 1);
