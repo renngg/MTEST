@@ -70,7 +70,7 @@ const QuestionPage = () => {
         <img
           src={`/questions/q${page}.png`}
           alt={`Question ${page}`}
-          className="max-w-xl object-contain mx-auto"
+          className="max-w-lg h-auto object-contain mx-auto"
         />
       </div>
 
