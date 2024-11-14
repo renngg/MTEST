@@ -1,5 +1,5 @@
 import { connectDB } from "@/util/database.js";
-import { Login_btn, Logout_btn, UIs, Update_button } from "./homeUi";
+import { Admin_UIs, Login_btn, Logout_btn, UIs, Update_button } from "./homeUi";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import Check from "./check";
@@ -39,7 +39,7 @@ export default async function Home() {
           grade={session ? user.grade : null}
           percentileRank={session ? user.percentileRank : null}
         />
-        <Update_button />
+        <Admin_UIs />
       </div>
 
       <div className="flex justify-center items-center space-x-2 p-4 mt-auto">

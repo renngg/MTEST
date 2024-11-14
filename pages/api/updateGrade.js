@@ -4,8 +4,8 @@ import { authOptions } from './auth/[...nextauth]';
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
-  if (session.user.email != process.env.ADMIN_EMAIL) return res.status(500).json({ error: 'You are not admin' });
-  if (req.method === 'GET') return res.status(200).json({ error: 'You are admin' });
+  if (session.user.email != process.env.ADMIN_EMAIL) return res.status(500).json({ error: 'You aren\'t' });
+  if (req.method === 'GET') return res.status(200).json({ message: 'You are the admin' });
 
   if (req.method === 'POST') {
     const db = (await connectDB).db('test');

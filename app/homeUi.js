@@ -57,15 +57,9 @@ export function UIs(props) {
 
   return (
     <>
-      <div className="flex items-center justify-center w-full px-8 py-6 h-68 border-2 border-black rounded-lg shadow-lg bg-gray-100 transition-all duration-300">
+      <div className={isAdmin ? "hidden" : "flex items-center justify-center w-full px-8 py-6 h-68 border-2 border-black rounded-lg shadow-lg bg-gray-100 transition-all duration-300"}>
         <div className='text-center'>
-          { isAdmin
-            ?
-            <div>
-              {/* 응시인원,  */}
-            </div>
-            :
-            <div>
+          <div>
               <span className="font-medium text-xl text-black">
                 {props.score ? (
                   `[${props.name}${props.name.slice(-1)}님의 성적]`
@@ -122,7 +116,6 @@ export function UIs(props) {
                   )}
               </div> 
             </div>
-          }
         </div>
       </div>
 
@@ -145,8 +138,9 @@ export function UIs(props) {
   );
 }
 
-export function Update_button() {
+export function Admin_UIs() {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [personnel, setPersonnel] = useState(0);
 
   useEffect(() => {
     // 서버에서 관리자인지 확인하는 API 호출
@@ -166,21 +160,32 @@ export function Update_button() {
   const handleUpdate = () => {
     fetch("/api/updateGrade", {
       method: 'POST',
+    })
+    .then(() => {
+      fetch("/api/checkPersonnel", {
+        method: 'GET',
       })
-      .then((res) => {
-        if (res.ok) {
-          setIsAdmin(true);
-        }
+      .then((res) => res.json())  // JSON으로 파싱된 결과 반환
+      .then((data) => {
+        setPersonnel(data.personnel);  // 파싱된 데이터를 사용
       })
-    }
+    });
+  }
 
   return (
-    <button
-      onClick={handleUpdate}
-      className="border-2 border-rose-400 text-rose-400 hover:shadow-lg hover:bg-pink-100 transition-all rounded-lg py-3 px-8 text-xl w-full"
-      style={{ display: isAdmin ? 'block' : 'none' }}
-    >
-      표본 업데이트
-    </button>
+    <>
+      <div className={isAdmin ? "block w-full" : "hidden"}>
+        <div className="border-2 border-blue-400 text-blue-200 items-center transition-all rounded-lg py-3 px-8 text-xl">
+          {`현재 응시 인원은 ${personnel}명`}
+        </div>
+      </div>
+
+      <button
+        onClick={handleUpdate}
+        className={`border-2 border-rose-400 text-rose-200 hover:shadow-lg hover:bg-pink-100 transition-all rounded-lg py-3 px-8 text-xl w-full ${isAdmin ? 'block' : 'hidden'}`}
+      >
+        표본 업데이트
+      </button>
+    </>
   );
 }
