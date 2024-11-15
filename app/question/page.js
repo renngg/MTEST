@@ -97,8 +97,10 @@ const QuestionPage = () => {
       </div>
       <style jsx>{`
         .radio-box {
-          width: 60px;      /* 크기 키우기 */
-          height: 120px;    /* 크기 키우기 */
+          width: 10vw;      /* 크기 키우기 */
+          height: 20vw;    /* 크기 키우기 */
+          max-width: 60px; /* 최대 크기 */
+          max-height: 120px; /* 최대 크기 */
           border: 2px solid #000;
           border-radius: 30px;  /* 둥근 모서리 */
           display: inline-block;
