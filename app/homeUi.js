@@ -64,7 +64,9 @@ export function UIs(props) {
                 {props.score ? (
                   `[${props.name}${props.name.slice(-1)}님의 성적]`
                 ) : (
-                  <span className="text-gray-700">응시하면 성적이 보인단다</span>
+                  <span className="text-gray-700 font-normal">
+                    {props.name ? `${props.name}아~ 응시하면 성적이 보인단다!` : "응시하면 성적이 보인단다!"}
+                  </span>
                 )}
               </span>
               

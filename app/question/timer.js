@@ -13,7 +13,7 @@ export default function TimerComponent() {
   }, []);
 
   useEffect(() => {
-    const end_audio   = new Audio("/sounds/ddd.mp3");
+    const end_audio = new Audio("/sounds/ddd.mp3");
 
     if (timeLeft <= 0) {
       // 시간 종료 시 처리

@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   if (!user.createdAt) {
     await db.collection("users").updateOne(
       { email: session.user.email },
-      { $set: { answers: Array(21).fill(0),
+      { $set: { answers: Array(17).fill(0),
         isSubmitted: false,
         createdAt: new Date(),
         score: null,

@@ -17,9 +17,13 @@ export default async function handler(req, res) {
   }
 
   if (req.method == 'POST') {
-    for (let q = 1; q <= 20; q++) {
+    for (let q = 1; q <= 16; q++) {
       if (user.answers[q] == correct_answer[q]) {
-        score += 2;
+        if (q == 3 || q == 5 || q == 7 || q == 8 || q == 10 || q == 13 || q == 14 || q == 16) {
+          score += 3;
+        } else {
+          score += 2;
+        }
       }
     }
     await db.collection('users').updateOne(

@@ -70,7 +70,7 @@ const QuestionPage = () => {
         <img
           src={`/questions/q${page}.png`}
           alt={`Question ${page}`}
-          className="max-w-screen h-auto object-contain mx-auto"
+          className="max-w-md h-auto object-contain mx-auto"
         />
       </div>
 
@@ -123,7 +123,7 @@ const QuestionPage = () => {
       <div className="relative bottom-4 left-0 right-0 flex justify-around space-x-4 my-8 mt-28">
         {/* 이전 문항 버튼 */}
         <button
-          onClick={() => setPage(page === 1 ? 20 : page - 1)}
+          onClick={() => setPage(page === 1 ? 16 : page - 1)}
           className="bg-slate-500 text-white px-6 py-2 rounded-full shadow-md hover:bg-slate-600"
           style={{ display: page === 1 ? 'none' : 'inline-block' }}
         >
@@ -132,7 +132,8 @@ const QuestionPage = () => {
         {/* 다음 문항 버튼 */}
         <button
           onClick={() => {
-            if (page === 20) {
+            const end_audio = new Audio("/sounds/ddd.mp3");
+            if (page === 16) {
               if (confirm("제출하시겠습니까?")) {
                 fetch("/api/submitting", {
                   method: 'POST',
@@ -141,7 +142,6 @@ const QuestionPage = () => {
                   },
                 })
                 .then(() => {
-                  const end_audio = new Audio("/sounds/ddd.mp3");
                   end_audio.play();
                   alert("제출되었습니다. 마킹하지 않은 문항은 0점 처리됩니다.");
                   window.location.href = '/';
@@ -153,7 +153,7 @@ const QuestionPage = () => {
           }}
           className="bg-slate-700 text-white px-6 py-2 rounded-full shadow-md hover:bg-slate-800"
         >
-          { page === 20 ? "제출" : "다음 문항" }
+          { page === 16 ? "제출" : "다음 문항" }
         </button>
       </div>
     </>
